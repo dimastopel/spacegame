@@ -14,10 +14,10 @@
 #include "allegro_utils.h"
 #include "utils.h"
 #include "stars.h"
+#include "hud.h"
+#include "ship.h"
 #include "game.h"
 
-#define WIDTH  1000
-#define HEIGHT 1000
 #define M_PI_DOUBLE 6.283185307
 
 void init() 
@@ -29,25 +29,6 @@ void init()
 void shut_down(ALLEGRO_DISPLAY* display) 
 {
    shut_down_allegro(display);
-}
-
-
-void draw_ship(float angle)
-{
-   static int ship_lenght = 30;
-   ALLEGRO_COLOR ship_color = al_color_name("lightcyan");
-   al_draw_line(
-      WIDTH / 2 + cos(angle)*ship_lenght/2, 
-      HEIGHT / 2 - sin(angle)*ship_lenght/2, 
-      WIDTH / 2 - cos(angle)*ship_lenght/2, 
-      HEIGHT / 2 + sin(angle)*ship_lenght/2, 
-      ship_color, 5);
-
-   al_draw_filled_circle(
-      WIDTH / 2 + cos(angle)*ship_lenght/2, 
-      HEIGHT / 2 - sin(angle)*ship_lenght/2, 
-      5, 
-      ship_color);
 }
 
 int main(int argc, char **argv){
@@ -70,11 +51,12 @@ int main(int argc, char **argv){
 
       al_clear_to_color(al_color_name("black"));
 
-      draw_stars_tiles(context.angle, 3, context.is_moving, WIDTH, HEIGHT, 0);
-      draw_stars_tiles(context.angle, 2, context.is_moving, WIDTH, HEIGHT, 0);
-      draw_stars_tiles(context.angle, 1, context.is_moving, WIDTH, HEIGHT, 0);
+      draw_stars_tiles(&context, 3, 0);
+      draw_stars_tiles(&context, 2, 0);
+      draw_stars_tiles(&context, 1, 0);
 
-      draw_ship(context.angle);
+      draw_ship(&context);
+      draw_hud(&context);
 
       al_flip_display();
    }
