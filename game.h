@@ -22,10 +22,11 @@ long, double: 64 bit
  */
 
 typedef struct {
-	int current_x;
-	int current_y;
+	double current_x;
+	double current_y;
 	int is_moving;
 	float angle;
+	float speed;
 } Context;
 
 

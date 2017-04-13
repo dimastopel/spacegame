@@ -8,10 +8,11 @@
 #include <allegro5/allegro_ttf.h>
 
 #include "allegro_utils.h"
+#include "utils.h"
 #include "hud.h"
 
 #define LOC_HUD_WIDTH (WIDTH / 100 * 20)
-#define LOC_HUD_HEIGHT (HEIGHT / 100 * 6)
+#define LOC_HUD_HEIGHT (HEIGHT / 100 * 8)
 #define LOC_HUD_MARGIN_WIDTH 20
 #define LOC_HUD_MARGIN_HEIGHT 20
 #define LOC_HUD_MARGIN_TEXT_WIDTH 2
@@ -42,10 +43,15 @@ void draw_hud(Context* context)
     	location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
     	location_hud_y + 2*LOC_HUD_MARGIN_TEXT_HEIGHT + FONT_SIZE, 
     	0, 
-    	"X: %d", context->current_x);
+    	"X: %10.1f", context->current_x);
     al_draw_textf(get_font(), al_color_name("white"), 
     	location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
     	location_hud_y + 3*LOC_HUD_MARGIN_TEXT_HEIGHT + 2*FONT_SIZE, 
     	0, 
-    	"Y: %d", context->current_y);
+    	"Y: %10.1f", context->current_y);
+    al_draw_textf(get_font(), al_color_name("white"), 
+        location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
+        location_hud_y + 4*LOC_HUD_MARGIN_TEXT_HEIGHT + 3*FONT_SIZE, 
+        0, 
+        "Alpha: %3.2f", radians_to_degrees(context->angle));
 }

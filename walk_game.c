@@ -42,7 +42,7 @@ int main(int argc, char **argv){
    ALLEGRO_SAMPLE* sample = al_load_sample("TheForestAwakes.ogg");
    //al_play_sample(sample, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
 
-   Context context = {40,40,0,0};
+   Context context = {40,40,0,0,1.0};
 
    while (true)
    {
@@ -71,11 +71,19 @@ int main(int argc, char **argv){
 void do_left(Context* context, int key_up)
 {
    context->angle += ANGULAR_VELOCITY;
+   if (context->angle > 2*M_PI)
+   {
+   		context->angle -= 2*M_PI;
+   }
 }
 
 void do_right(Context* context, int key_up)
 {
    context->angle -= ANGULAR_VELOCITY;
+   if (context->angle < 0)
+   {
+   		context->angle += 2*M_PI;
+   }
 }
 
 void do_up(Context* context, int key_up)

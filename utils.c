@@ -1,9 +1,25 @@
 #include "utils.h"
+#include <math.h>
 
 int is_in_the_box(int x, int y, int bx, int by, int bw, int bh)
 {
-   return 
-      x >= bx && x < bx + bw && y >= by && y < by + bh;  
+ return 
+ x >= bx && x < bx + bw && y >= by && y < by + bh;  
+}
+
+float radians_to_degrees(float radians)
+{
+    return 360 * radians / (2 * M_PI);
+}
+
+long to_int(double val)
+{
+    return (int)(val + 0.5);
+}
+
+long to_long(double val)
+{
+    return (long)(val + 0.5);
 }
 
 /** Robert Jenkins' 96 bit Mix Function. */

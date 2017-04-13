@@ -18,39 +18,44 @@
 void draw_stars_tiles(Context* context, int scale, int is_debug)
 {
    static float star_step = 5;
-   static int center_x_1 = 177223;
-   static int center_y_1 = 102241;
-   static int center_x_2 = 100343;
-   static int center_y_2 = 102311;
-   static int center_x_3 = 107223;
-   static int center_y_3 = 109833;
+   static double center_x_1 = 177223;
+   static double center_y_1 = 102241;
+   static double center_x_2 = 100343;
+   static double center_y_2 = 102311;
+   static double center_x_3 = 107223;
+   static double center_y_3 = 109833;
 
    ALLEGRO_COLOR star_color;
 
    int tile_size = 512;
+   double real_x;
+   double real_y;
    int center_x;
    int center_y;
 
    if (scale == 1) {
-      center_x = center_x_1;
-      center_y = center_y_1;
+      real_x = center_x_1;
+      real_y = center_y_1;
       star_color = al_map_rgb(255,255,255);
 
-      context->current_x = center_x;
-      context->current_y = center_y;
+      context->current_x = real_x;
+      context->current_y = real_y;
    } 
    else if (scale == 2)
    {
-      center_x = center_x_2;
-      center_y = center_y_2;
+      real_x = center_x_2;
+      real_y = center_y_2;
       star_color = al_map_rgb(190,190,190);
    }
    else
    {
-      center_x = center_x_3;
-      center_y = center_y_3;
+      real_x = center_x_3;
+      real_y = center_y_3;
       star_color = al_map_rgb(120,120,120);
    }
+
+   center_x = to_int(real_x);
+   center_y = to_int(real_y);
 
    int tile_x = ((center_x - WIDTH / 2) / tile_size) * tile_size - tile_size;
    int tile_y = ((center_y - HEIGHT / 2) / tile_size) * tile_size - tile_size;
@@ -98,22 +103,22 @@ void draw_stars_tiles(Context* context, int scale, int is_debug)
 
    if (context->is_moving)
    {
-      center_x += star_step / (scale) * cos(context->angle);
-      center_y -= star_step / (scale) * sin(context->angle);
+      real_x += context->speed / (scale) * cos(context->angle);
+      real_y -= context->speed / (scale) * sin(context->angle);
 
       if (scale == 1) {
-         center_x_1 = center_x;
-         center_y_1 = center_y;
+         center_x_1 = real_x;
+         center_y_1 = real_y;
       } 
       else if (scale == 2)
       {
-         center_x_2 = center_x;
-         center_y_2 = center_y;
+         center_x_2 = real_x;
+         center_y_2 = real_y;
       }
       else
       {
-         center_x_3 = center_x;
-         center_y_3 = center_y;
+         center_x_3 = real_x;
+         center_y_3 = real_y;
       }
    }
 
