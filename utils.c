@@ -4,7 +4,7 @@
 int is_in_the_box(int x, int y, int bx, int by, int bw, int bh)
 {
  return 
- x >= bx && x < bx + bw && y >= by && y < by + bh;  
+ x >= bx && x < bx + bw && y >= by && y < by + bh;   
 }
 
 float radians_to_degrees(float radians)

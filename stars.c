@@ -17,7 +17,6 @@
 //void draw_stars_tiles(float angle, int scale, int is_moving, int width, int height, int is_debug)
 void draw_stars_tiles(Context* context, int scale, int is_debug)
 {
-   static float star_step = 5;
    static double center_x_1 = 177223;
    static double center_y_1 = 102241;
    static double center_x_2 = 100343;
@@ -83,15 +82,7 @@ void draw_stars_tiles(Context* context, int scale, int is_debug)
                int py = HEIGHT / 2 + hash_off_y + (j - center_y);
                hash >>= 3;
 
-               if (scale == 1 && rand() % 5 == 0)
-               {
-                  al_draw_rectangle(px, py, px+1, py+1, star_color, 1);
-               }
-               else
-               {
-                  al_draw_rectangle(px, py, px+1, py+1, star_color, 1);
-                  //al_put_pixel(px, py, star_color);
-               }
+               al_draw_rectangle(px, py, px+1, py+1, star_color, 1);
 
                if (is_debug)
                {

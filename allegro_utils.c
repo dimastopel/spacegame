@@ -78,7 +78,7 @@ void process_key_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
    static int current_up = 0;
    static int current_down = 0;
 
-   al_init_timeout(&timeout, 0.001);
+   al_init_timeout(&timeout, 0.01);
    al_wait_for_event_until(event_queue, &ev, &timeout);
 
    if(ev.type == ALLEGRO_EVENT_KEY_DOWN && ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE) 

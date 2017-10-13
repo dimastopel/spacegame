@@ -16,9 +16,10 @@
 #include "stars.h"
 #include "hud.h"
 #include "ship.h"
+#include "world.h"
 #include "game.h"
 
-#define M_PI_DOUBLE 6.283185307
+#define M_PI_DOUBLE 6.283185307 
 
 void init() 
 {
@@ -42,7 +43,7 @@ int main(int argc, char **argv){
    ALLEGRO_SAMPLE* sample = al_load_sample("TheForestAwakes.ogg");
    //al_play_sample(sample, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
 
-   Context context = {40,40,0,0,1.0};
+   Context context = {40,40,0,0,5.0};
 
    while (true)
    {
@@ -56,6 +57,7 @@ int main(int argc, char **argv){
       draw_stars_tiles(&context, 1, 0);
 
       draw_ship(&context);
+      draw_world(&context);
       draw_hud(&context);
 
       al_flip_display();
