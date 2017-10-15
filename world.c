@@ -82,8 +82,8 @@ void draw_moving_planet(Context* context)
    {
       double time = al_get_time();
 
-      double x_skew = sin(time) * movement_span;
-      double y_skew = cos(time) * movement_span;
+      double x_skew = cos(time) * movement_span;
+      double y_skew = sin(time) * movement_span;
 
       al_draw_scaled_rotated_bitmap(planet1,
             b_width / 2, 
@@ -92,7 +92,7 @@ void draw_moving_planet(Context* context)
             planet1_y - context->current_y + (HEIGHT / 2) + (int)y_skew, 
             scale_factor, 
             scale_factor,
-            M_PI_2 + M_PI_4, 
+            M_PI_2 + M_PI_4 + M_PI_2 + time, 
             0);
    }
 }
