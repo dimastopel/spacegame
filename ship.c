@@ -1,19 +1,11 @@
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
-#include <allegro5/allegro_color.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_ttf.h>
-#include <stdio.h>
-#include <allegro5/allegro_memfile.h>
+//#include <allegro5/allegro_memfile.h>
 
 #include "ship.h"
 
 // ld -r -b binary -o shipimage.o ship.png
-extern unsigned char _binary_ship_png_start[];
-extern unsigned char _binary_ship_png_end[];
+//extern unsigned char _binary_ship_png_start[];
+//extern unsigned char _binary_ship_png_end[];
 
 void draw_ship(Context* context)
 {

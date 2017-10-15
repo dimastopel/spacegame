@@ -1,4 +1,5 @@
 #include "game.h"
+#include <allegro5/allegro_font.h>
 
 #ifndef _ALLEGRO_HELPERS_
 #define _ALLEGRO_HELPERS_
