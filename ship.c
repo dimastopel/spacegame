@@ -16,7 +16,7 @@ void draw_ship(Context* context)
 
    static int b_width = 0;
    static int b_height = 0;
-   static float scale_factor = 0.6;
+   static float scale_factor = 0.4;
 
    if (!ship)
    {
