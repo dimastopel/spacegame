@@ -14,19 +14,23 @@
 #include "game.h"
 #include "stars.h"
 
-//void draw_stars_tiles(float angle, int scale, int is_moving, int width, int height, int is_debug)
-void draw_stars_tiles(Context* context, int scale, int is_debug)
+#define SCALE_FACTOR 0.5
+#define TILE_SIZE 512
+
+void draw_stars_tiles_with_scale(Context* context, int scale, int is_debug)
 {
-   static double center_x_1 = 177223;
-   static double center_y_1 = 102241;
+   static double center_x_1 = 157223;
+   static double center_y_1 = 112241;
+
    static double center_x_2 = 100343;
    static double center_y_2 = 102311;
+
    static double center_x_3 = 107223;
    static double center_y_3 = 109833;
 
    ALLEGRO_COLOR star_color;
 
-   int tile_size = 512;
+   int tile_size = TILE_SIZE;
    double real_x;
    double real_y;
    int center_x;
@@ -36,9 +40,6 @@ void draw_stars_tiles(Context* context, int scale, int is_debug)
       real_x = center_x_1;
       real_y = center_y_1;
       star_color = al_map_rgb(255,255,255);
-
-      context->current_x = real_x;
-      context->current_y = real_y;
    } 
    else if (scale == 2)
    {
@@ -94,8 +95,8 @@ void draw_stars_tiles(Context* context, int scale, int is_debug)
 
    if (context->is_moving)
    {
-      real_x += context->speed / (scale) * cos(context->angle);
-      real_y -= context->speed / (scale) * sin(context->angle);
+      real_x += context->speed / (scale + SCALE_FACTOR) * cos(context->angle);
+      real_y -= context->speed / (scale + SCALE_FACTOR) * sin(context->angle);
 
       if (scale == 1) {
          center_x_1 = real_x;
@@ -114,3 +115,11 @@ void draw_stars_tiles(Context* context, int scale, int is_debug)
    }
 
 }
+
+void draw_stars_tiles(Context* context, int is_debug)
+{
+  draw_stars_tiles_with_scale(context, 3, is_debug);
+  draw_stars_tiles_with_scale(context, 2, is_debug);
+  draw_stars_tiles_with_scale(context, 1, is_debug);
+}
+

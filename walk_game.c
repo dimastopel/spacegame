@@ -43,7 +43,7 @@ int main(int argc, char **argv){
    ALLEGRO_SAMPLE* sample = al_load_sample("TheForestAwakes.ogg");
    //al_play_sample(sample, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
 
-   Context context = {40,40,0,0,5.0};
+   Context context = {177223,102241,0,0,5.0};
 
    while (true)
    {
@@ -52,10 +52,7 @@ int main(int argc, char **argv){
 
       al_clear_to_color(al_color_name("black"));
 
-      draw_stars_tiles(&context, 3, 0);
-      draw_stars_tiles(&context, 2, 0);
-      draw_stars_tiles(&context, 1, 0);
-
+      draw_stars_tiles(&context, 0);
       draw_ship(&context);
       draw_world(&context);
       draw_hud(&context);
@@ -91,6 +88,8 @@ void do_right(Context* context, int key_up)
 void do_up(Context* context, int key_up)
 {
    context->is_moving = !key_up;
+   context->current_x += context->speed * cos(context->angle);
+   context->current_y -= context->speed * sin(context->angle);
 }
 
 void do_down(Context* context, int key_up)
