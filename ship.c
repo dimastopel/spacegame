@@ -3,6 +3,7 @@
 
 #include "ship.h"
 
+// Example embedding resource within the executable and getting pointer to it.
 // ld -r -b binary -o shipimage.o ship.png
 //extern unsigned char _binary_ship_png_start[];
 //extern unsigned char _binary_ship_png_end[];
@@ -24,6 +25,7 @@ void draw_ship(Context* context)
          ship_nofire = al_load_bitmap("res/ship_nofire.png");
          ship = ship_nofire;
 
+         // Example of loading a resource embedded within the executable. Need mem_file include above. 
          //size_t image_len = _binary_ship_png_end - _binary_ship_png_start;
          //ALLEGRO_FILE* ship_image_fp = al_open_memfile(_binary_ship_png_start, image_len, "r");
          //ship = al_load_bitmap_f(ship_image_fp, ".png");
@@ -38,26 +40,5 @@ void draw_ship(Context* context)
    		b_width / 2, b_height / 2, 
    		WIDTH / 2, HEIGHT / 2, 
    		scale_factor, scale_factor,
-   		//context->angle * -1 + M_PI_2, 0);
          (context->angle * -1) - M_PI_4, 0);
-
-   /*
-   */
-   /*
-   static int ship_lenght = 30;
-   ALLEGRO_COLOR ship_color = al_color_name("lightcyan");
-   al_draw_line(
-      WIDTH / 2 + cos(angle)*ship_lenght/2, 
-      HEIGHT / 2 - sin(angle)*ship_lenght/2, 
-      WIDTH / 2 - cos(angle)*ship_lenght/2, 
-      HEIGHT / 2 + sin(angle)*ship_lenght/2, 
-      ship_color, 5);
-
-   al_draw_filled_circle(
-      WIDTH / 2 + cos(angle)*ship_lenght/2, 
-      HEIGHT / 2 - sin(angle)*ship_lenght/2, 
-      5, 
-      ship_color);
-	*/
-      
 }

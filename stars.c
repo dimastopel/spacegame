@@ -70,11 +70,10 @@ void draw_stars_tiles_with_scale(Context* context, int scale, int is_debug)
 
            uint64_t hash = mix64(i, j);
            for (int n = 0; n < 4*scale; n++) {
-               //int px = (hash % tile_size) + (i - center_x);
                int hash_off_x = hash % tile_size;
                int px = WIDTH / 2 + hash_off_x + (i - center_x);
                hash >>= 3;
-               //int py = (hash % tile_size) + (j - center_y);
+
                int hash_off_y = hash % tile_size;
                int py = HEIGHT / 2 + hash_off_y + (j - center_y);
                hash >>= 3;

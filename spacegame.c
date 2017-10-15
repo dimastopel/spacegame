@@ -32,14 +32,10 @@ int main(int argc, char **argv){
 
    ALLEGRO_DISPLAY *display = create_display(WIDTH, HEIGHT);
 
-   //ALLEGRO_TIMER* timer = al_create_timer(1.000 / 50);
-
    ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
    al_register_event_source(event_queue, al_get_keyboard_event_source());
-   //al_register_event_source(event_queue, al_get_timer_event_source(timer));
 
-   //al_start_timer(timer);
-
+   //Backgroud music example
    //al_reserve_samples(1);
    //ALLEGRO_SAMPLE* sample = al_load_sample("res/TheForestAwakes.ogg");
    //al_play_sample(sample, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
