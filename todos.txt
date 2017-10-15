@@ -1,5 +1,4 @@
-1. move all resoruces to part of executable (may be via makefile). like in ship.c. 
-2. fix the stars issue - create another layer so that big planets move less than stars
+[on hold] 1. move all resoruces to part of executable (may be via makefile). like in ship.c. 
 3. create dialogs (check allegro built in)
 4. create more planets
 5. random planets generation?

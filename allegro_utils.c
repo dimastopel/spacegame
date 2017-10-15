@@ -42,14 +42,6 @@ ALLEGRO_DISPLAY* create_display(int width, int height)
    return display;
 }
 
-ALLEGRO_EVENT_QUEUE* create_event_queue()
-{
-   ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
-   al_register_event_source(event_queue, al_get_keyboard_event_source());
-
-   return event_queue;
-}
-
 ALLEGRO_FONT* get_font()
 {
    static  ALLEGRO_FONT *font = NULL;
@@ -68,7 +60,7 @@ void shut_down_allegro(ALLEGRO_DISPLAY* display)
 }
 
 
-void process_key_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
+void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
 {
    static ALLEGRO_EVENT ev;
    static ALLEGRO_TIMEOUT timeout;
@@ -78,7 +70,7 @@ void process_key_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
    static int current_up = 0;
    static int current_down = 0;
 
-   al_init_timeout(&timeout, 0.01);
+   al_init_timeout(&timeout, 1 / 50);
    al_wait_for_event_until(event_queue, &ev, &timeout);
 
    if(ev.type == ALLEGRO_EVENT_KEY_DOWN && ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE) 
@@ -155,6 +147,11 @@ void process_key_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
             break;
       }
    }
+
+   if(ev.type == ALLEGRO_EVENT_TIMER) {
+
+   }
+
 }
 
 

@@ -5,10 +5,9 @@
 
 void init_allegro();
 ALLEGRO_DISPLAY* create_display();
-ALLEGRO_EVENT_QUEUE* create_event_queue();
 ALLEGRO_FONT* get_font();
 void shut_down_allegro(ALLEGRO_DISPLAY* display);
-void process_key_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context);
+void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context);
 
 
 // keys callbacks
