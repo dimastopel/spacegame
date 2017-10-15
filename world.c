@@ -24,7 +24,7 @@ void draw_world(Context* context)
 
    if (!planet1)
    {
-   		planet1 = al_load_bitmap("planet3.png");
+   		planet1 = al_load_bitmap("res/planet3.png");
 		b_width = al_get_bitmap_width(planet1);
    	    b_height = al_get_bitmap_height(planet1);
    }

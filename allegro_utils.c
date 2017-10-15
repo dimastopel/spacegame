@@ -56,7 +56,7 @@ ALLEGRO_FONT* get_font()
 
    if (!font)
    {
-      font = al_load_ttf_font("neuropol_font.ttf", FONT_SIZE, 0);
+      font = al_load_ttf_font("res/neuropol_font.ttf", FONT_SIZE, 0);
    }
    return font;
 }

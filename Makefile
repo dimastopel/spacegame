@@ -30,7 +30,7 @@ OBJ    =walk_game.o allegro_utils.o utils.o stars.o hud.o ship.o world.o
 %.o: %.c $(DEPS)
 	@$(CC) -c -o $@ $< $(CFLAGS)
 
-walk: $(OBJ)
+spacegame: $(OBJ)
 	@$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
