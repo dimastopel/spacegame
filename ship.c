@@ -48,7 +48,7 @@ void draw_fired_lasers(Context* context)
    }
 }
 
-void draw_ship(Context* context)
+void draw_ship_vehicle(Context* context)
 {
    static ALLEGRO_BITMAP* ship = NULL;
 
@@ -81,7 +81,11 @@ void draw_ship(Context* context)
    		WIDTH / 2, HEIGHT / 2, 
    		scale_factor, scale_factor,
          (context->angle * -1) - M_PI_4, 0);
+}
 
+void draw_ship(Context* context)
+{
+   draw_ship_vehicle(context);
    draw_fired_lasers(context);
 }
 
