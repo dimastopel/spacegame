@@ -100,31 +100,15 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
    if(ev.type == ALLEGRO_EVENT_KEY_UP) {
       switch(ev.keyboard.keycode) {
          case ALLEGRO_KEY_LEFT: 
-            if (current_left)
-            {
-               do_left(context, 1);
-            }
             current_left = 0;
             break;
          case ALLEGRO_KEY_RIGHT:
-            if (current_right)
-            {
-               do_right(context, 1);
-            }
             current_right = 0;
             break;
          case ALLEGRO_KEY_UP:
-            if (current_up)
-            {
-               do_up(context, 1);
-            }
             current_up = 0;
             break;
          case ALLEGRO_KEY_DOWN:
-            if (current_down)
-            {
-               do_down(context, 1);
-            }
             current_down = 0;
             break;
       }
