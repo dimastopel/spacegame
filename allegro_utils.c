@@ -77,6 +77,8 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
       exit(0);
    }
 
+   //printf("*%d%d%d%d*\n",current_left, current_right, current_up, current_fire);
+
    do_left(context, !current_left);
    do_right(context, !current_right);
    do_up(context, !current_up);
@@ -97,7 +99,7 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
          case ALLEGRO_KEY_DOWN:
             current_down = 1;
             break;
-         case ALLEGRO_KEY_SPACE:
+         case ALLEGRO_KEY_LCTRL:
             current_fire = 1;
             break;
       }
@@ -117,7 +119,7 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
          case ALLEGRO_KEY_DOWN:
             current_down = 0;
             break;
-         case ALLEGRO_KEY_SPACE:
+         case ALLEGRO_KEY_LCTRL:
             current_fire = 0;
             break;
       }
