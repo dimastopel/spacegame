@@ -12,9 +12,9 @@
 //extern unsigned char _binary_ship_png_start[];
 //extern unsigned char _binary_ship_png_end[];
 
-#define MAX_FIRED_LASERS 100
+#define MAX_FIRED_LASERS 200
 #define FIRED_LASER_SPEED 1300
-#define FIRED_LASER_LIFE_TIME 5
+#define FIRED_LASER_LIFE_TIME 3
 
 typedef struct {
    int alive;
@@ -43,11 +43,9 @@ void draw_fired_lasers(Context* context)
          if (sx > 0 && sx < WIDTH && sy > 0 && sy < HEIGHT)
          {
             al_draw_rectangle(sx-1, sy-1, sx+2, sy+2, al_color_name("lightgreen"), 0);
-            //printf("Found fire! %f %f %f %d %d\n",distance, laser_x, laser_y, sx, sy);
          }
       }
    }
-
 }
 
 void draw_ship(Context* context)
@@ -93,14 +91,13 @@ void do_fire(Context* context, int key_up)
    {
       return;
    }
-   //printf("Do fire clicked!\n");
+
    for (int i = 0; i < sizeof(fired_lasers)/sizeof(FiredLaser); i++)
    {
       double current_time = al_get_time();
       if (fired_lasers[i].alive && (current_time - fired_lasers[i].fired_time) > FIRED_LASER_LIFE_TIME)
       {
          fired_lasers[i].alive = 0;
-         break;
       }
 
       if (!fired_lasers[i].alive)
@@ -113,5 +110,4 @@ void do_fire(Context* context, int key_up)
          break;
       }
    }
-
 }
