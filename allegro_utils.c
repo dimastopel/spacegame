@@ -67,6 +67,8 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
    static int current_up = 0;
    static int current_down = 0;
 
+   static int current_fire = 0;
+
    al_init_timeout(&timeout, 1 / 50);
    al_wait_for_event_until(event_queue, &ev, &timeout);
 
@@ -79,6 +81,7 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
    do_right(context, !current_right);
    do_up(context, !current_up);
    do_down(context, !current_down);
+   do_fire(context, !current_fire);
 
    if(ev.type == ALLEGRO_EVENT_KEY_DOWN) {
       switch(ev.keyboard.keycode) {
@@ -93,6 +96,9 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
             break;
          case ALLEGRO_KEY_DOWN:
             current_down = 1;
+            break;
+         case ALLEGRO_KEY_SPACE:
+            current_fire = 1;
             break;
       }
    }
@@ -110,6 +116,9 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
             break;
          case ALLEGRO_KEY_DOWN:
             current_down = 0;
+            break;
+         case ALLEGRO_KEY_SPACE:
+            current_fire = 0;
             break;
       }
    }
