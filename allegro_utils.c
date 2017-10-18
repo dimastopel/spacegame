@@ -57,7 +57,6 @@ void shut_down_allegro(ALLEGRO_DISPLAY* display)
    al_shutdown_primitives_addon();
 }
 
-
 void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
 {
    static ALLEGRO_EVENT ev;
@@ -76,25 +75,10 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
       exit(0);
    }
 
-   if (current_left)
-   {
-      do_left(context, 0);
-   }
-
-   if (current_right)
-   {         
-      do_right(context, 0);
-   }
-
-   if (current_up)
-   {
-      do_up(context, 0);
-   }
-
-   if (current_down)
-   {
-      do_down(context, 0);
-   }
+   do_left(context, !current_left);
+   do_right(context, !current_right);
+   do_up(context, !current_up);
+   do_down(context, !current_down);
 
    if(ev.type == ALLEGRO_EVENT_KEY_DOWN) {
       switch(ev.keyboard.keycode) {

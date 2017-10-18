@@ -34,7 +34,7 @@ void draw_ship(Context* context)
    	   b_height = al_get_bitmap_height(ship_fire);
    }
 
-   ship = context->is_moving ? ship_fire : ship_nofire;
+   ship = context->is_accelerating ? ship_fire : ship_nofire;
 
    al_draw_scaled_rotated_bitmap(ship,
    		b_width / 2, b_height / 2, 

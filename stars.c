@@ -88,27 +88,23 @@ void draw_stars_tiles_with_scale(Context* context, int scale, int is_debug)
        }
    }
 
-   if (context->is_moving)
-   {
-      real_x += context->speed / (scale + SCALE_FACTOR) * cos(context->angle);
-      real_y -= context->speed / (scale + SCALE_FACTOR) * sin(context->angle);
+    real_x = context->current_x / (scale + SCALE_FACTOR);
+    real_y = context->current_y / (scale + SCALE_FACTOR);
 
-      if (scale == 1) {
-         center_x_1 = real_x;
-         center_y_1 = real_y;
-      } 
-      else if (scale == 2)
-      {
-         center_x_2 = real_x;
-         center_y_2 = real_y;
-      }
-      else
-      {
-         center_x_3 = real_x;
-         center_y_3 = real_y;
-      }
-   }
-
+    if (scale == 1) {
+       center_x_1 = real_x;
+       center_y_1 = real_y;
+    } 
+    else if (scale == 2)
+    {
+       center_x_2 = real_x;
+       center_y_2 = real_y;
+    }
+    else
+    {
+       center_x_3 = real_x;
+       center_y_3 = real_y;
+    }
 }
 
 void draw_stars_tiles(Context* context, int is_debug)

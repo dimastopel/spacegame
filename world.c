@@ -97,8 +97,8 @@ void load_world()
 
 
    SpaceObject spoutnik;
-   spoutnik.center_x = 175223;
-   spoutnik.center_y = 101241;
+   spoutnik.center_x = 177223;
+   spoutnik.center_y = 101541;
    spoutnik.resource = al_load_bitmap("res/spoutnik.png");
    spoutnik.move_type = MOVE_TYPE_CIRCLE;
    spoutnik.scale_factor = 0.4;

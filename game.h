@@ -6,6 +6,7 @@
 
 #define SCROLL_VELOCITY 5
 #define ANGULAR_VELOCITY (M_PI / 100)
+#define MAX_SHIP_SPEED 10
 
 #define WIDTH  1000
 #define HEIGHT 1000
@@ -24,7 +25,7 @@ long, double: 64 bit
 typedef struct {
 	double current_x;
 	double current_y;
-	int is_moving;
+	int is_accelerating;
 	float angle;
 	float speed;
 } Context;
