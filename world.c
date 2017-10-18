@@ -23,7 +23,7 @@ typedef struct {
    int is_rotating;
 } SpaceObject;
 
-static SpaceObject space_objects[2];
+static SpaceObject space_objects[4];
 
 void draw_space_object(Context* context, SpaceObject* space_object, double time)
 {
@@ -76,9 +76,10 @@ void draw_world(Context* context)
 
    double time = al_get_time();
 
-
-   draw_space_object(context, &space_objects[0], time);
-   draw_space_object(context, &space_objects[1], time);
+   for (int i = 0; i < sizeof(space_objects) / sizeof(SpaceObject); i++)
+   {
+      draw_space_object(context, &space_objects[i], time);
+   }
 }
 
 void load_world()
@@ -94,11 +95,9 @@ void load_world()
    boring_planet.is_rotating = 0;
    space_objects[0] = boring_planet;
 
-
-
    SpaceObject spoutnik;
    spoutnik.center_x = 177223;
-   spoutnik.center_y = 101541;
+   spoutnik.center_y = 101441;
    spoutnik.resource = al_load_bitmap("res/spoutnik.png");
    spoutnik.move_type = MOVE_TYPE_CIRCLE;
    spoutnik.scale_factor = 0.4;
@@ -106,5 +105,27 @@ void load_world()
    spoutnik.initial_angle = M_PI_2 + M_PI_4 + M_PI_2;
    spoutnik.is_rotating = 1;
    space_objects[1] = spoutnik;
+
+   SpaceObject weird_ship;
+   weird_ship.center_x = 178203;
+   weird_ship.center_y = 100421;
+   weird_ship.resource = al_load_bitmap("res/ship.png");
+   weird_ship.move_type = MOVE_TYPE_HORIZONTAL;
+   weird_ship.scale_factor = 0.1;
+   weird_ship.move_span = 500;
+   weird_ship.initial_angle = 0;
+   weird_ship.is_rotating = 0;
+   space_objects[2] = weird_ship;
+
+   SpaceObject weird_planet;
+   weird_planet.center_x = 179203;
+   weird_planet.center_y = 101321;
+   weird_planet.resource = al_load_bitmap("res/planet3.png");
+   weird_planet.move_type = MOVE_TYPE_VERTICAL;
+   weird_planet.scale_factor = 0.2;
+   weird_planet.move_span = 400;
+   weird_planet.initial_angle = 0;
+   weird_planet.is_rotating = 1;
+   space_objects[3] = weird_planet;
 }
 
