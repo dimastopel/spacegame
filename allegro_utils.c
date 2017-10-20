@@ -11,6 +11,9 @@
 
 #include "allegro_utils.h"
 
+int screen_width;
+int screen_height;
+
 void init_allegro()
 {
    if(!al_init()) {
@@ -27,10 +30,20 @@ void init_allegro()
    al_init_ttf_addon();
 }
 
-ALLEGRO_DISPLAY* create_display(int width, int height)
+ALLEGRO_DISPLAY* create_display()
 {
+   ALLEGRO_MONITOR_INFO monitor_info;
+   al_get_monitor_info(0, &monitor_info);
+
+   screen_width = monitor_info.x2 - monitor_info.x1;
+   screen_height = monitor_info.y2 - monitor_info.y1;
+
+   // add margin
+   screen_width -= 70;
+   screen_height -= 60;
+
    ALLEGRO_DISPLAY *display = NULL;
-   display = al_create_display(width, height);
+   display = al_create_display(screen_width, screen_height);
 
    if(!display) {
       fprintf(stderr, "failed to create display!\n");

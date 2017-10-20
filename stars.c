@@ -53,29 +53,29 @@ void draw_stars_tiles_with_scale(Context* context, int scale, int is_debug)
    center_x = to_int(real_x);
    center_y = to_int(real_y);
 
-   int tile_x = ((center_x - WIDTH / 2) / tile_size) * tile_size - tile_size;
-   int tile_y = ((center_y - HEIGHT / 2) / tile_size) * tile_size - tile_size;
+   int tile_x = ((center_x - screen_width / 2) / tile_size) * tile_size - tile_size;
+   int tile_y = ((center_y - screen_height / 2) / tile_size) * tile_size - tile_size;
 
-   for (int i = tile_x; i <= WIDTH + tile_x + tile_size * 3; i += tile_size) {
-       for (int j = tile_y; j <= HEIGHT + tile_y + tile_size * 3; j += tile_size) {
+   for (int i = tile_x; i <= screen_width + tile_x + tile_size * 3; i += tile_size) {
+       for (int j = tile_y; j <= screen_height + tile_y + tile_size * 3; j += tile_size) {
 
            int lx = 0, ly = 0;
            if (is_debug)
            {
-              lx = i - (center_x - WIDTH / 2);
-              ly = j - (center_y - HEIGHT / 2);
-              al_draw_line(0, ly, WIDTH, ly, al_map_rgb(128,128,128), 1);
-              al_draw_line(lx, 0, lx, HEIGHT, al_map_rgb(128,128,128), 1);
+              lx = i - (center_x - screen_width / 2);
+              ly = j - (center_y - screen_height / 2);
+              al_draw_line(0, ly, screen_width, ly, al_map_rgb(128,128,128), 1);
+              al_draw_line(lx, 0, lx, screen_height, al_map_rgb(128,128,128), 1);
            }
 
            uint64_t hash = mix64(i, j);
            for (int n = 0; n < 4*scale; n++) {
                int hash_off_x = hash % tile_size;
-               int px = WIDTH / 2 + hash_off_x + (i - center_x);
+               int px = screen_width / 2 + hash_off_x + (i - center_x);
                hash >>= 3;
 
                int hash_off_y = hash % tile_size;
-               int py = HEIGHT / 2 + hash_off_y + (j - center_y);
+               int py = screen_height / 2 + hash_off_y + (j - center_y);
                hash >>= 3;
 
                al_draw_rectangle(px, py, px+1, py+1, star_color, 1);

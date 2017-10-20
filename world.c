@@ -33,10 +33,10 @@ void draw_space_object(Context* context, SpaceObject* space_object, double time)
    if (is_in_the_box(
       space_object->center_x,
       space_object->center_y,
-      context->current_x - (WIDTH / 2) - (object_width / 2) - (space_object->move_span / 2), 
-      context->current_y - (HEIGHT / 2) - (object_height / 2) - (space_object->move_span / 2),
-      WIDTH  + object_width + space_object->move_span,
-      HEIGHT + object_height + space_object->move_span))
+      context->current_x - (screen_width / 2) - (object_width / 2) - (space_object->move_span / 2), 
+      context->current_y - (screen_height / 2) - (object_height / 2) - (space_object->move_span / 2),
+      screen_width  + object_width + space_object->move_span,
+      screen_height + object_height + space_object->move_span))
    {
       double x_skew = 0;
       double y_skew = 0;
@@ -62,8 +62,8 @@ void draw_space_object(Context* context, SpaceObject* space_object, double time)
             space_object->resource,
             object_width / 2, 
             object_height / 2, 
-            space_object->center_x - context->current_x + (WIDTH / 2) + (int)x_skew, 
-            space_object->center_y - context->current_y + (HEIGHT / 2) + (int)y_skew, 
+            space_object->center_x - context->current_x + (screen_width / 2) + (int)x_skew, 
+            space_object->center_y - context->current_y + (screen_height / 2) + (int)y_skew, 
             space_object->scale_factor, 
             space_object->scale_factor,
             space_object->initial_angle + (space_object->is_rotating ? time : 0), 

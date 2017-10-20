@@ -8,8 +8,6 @@
 #include "utils.h"
 #include "hud.h"
 
-#define LOC_HUD_WIDTH (WIDTH / 100 * 20)
-#define LOC_HUD_HEIGHT (HEIGHT / 100 * 8)
 #define LOC_HUD_MARGIN_WIDTH 20
 #define LOC_HUD_MARGIN_HEIGHT 20
 #define LOC_HUD_MARGIN_TEXT_WIDTH 2
@@ -17,16 +15,19 @@
 
 void draw_hud(Context* context)
 {
-	int location_hud_x = WIDTH - LOC_HUD_WIDTH - LOC_HUD_MARGIN_WIDTH;
-	int location_hud_y = HEIGHT - LOC_HUD_HEIGHT - LOC_HUD_MARGIN_HEIGHT;
+    int loc_hud_width = screen_width / 100 * 20;
+    int loc_hud_height = screen_height / 100 * 8;
+	
+    int location_hud_x = screen_width - loc_hud_width - LOC_HUD_MARGIN_WIDTH;
+	int location_hud_y = screen_height - loc_hud_height - LOC_HUD_MARGIN_HEIGHT;
     al_draw_filled_rectangle(location_hud_x, location_hud_y, 
-    	location_hud_x + LOC_HUD_WIDTH, 
-    	location_hud_y + LOC_HUD_HEIGHT, 
+    	location_hud_x + loc_hud_width, 
+    	location_hud_y + loc_hud_height, 
     	al_color_name("black"));
 
     al_draw_rounded_rectangle(location_hud_x, location_hud_y, 
-        location_hud_x + LOC_HUD_WIDTH, 
-        location_hud_y + LOC_HUD_HEIGHT, 
+        location_hud_x + loc_hud_width, 
+        location_hud_y + loc_hud_height, 
         10,10,
         al_color_name("white")
         , 1);

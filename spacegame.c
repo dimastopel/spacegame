@@ -36,7 +36,7 @@ int main(int argc, char **argv){
 
    init();   
 
-   ALLEGRO_DISPLAY *display = create_display(WIDTH, HEIGHT);
+   ALLEGRO_DISPLAY *display = create_display();
 
    ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
    al_register_event_source(event_queue, al_get_keyboard_event_source());

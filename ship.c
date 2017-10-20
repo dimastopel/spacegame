@@ -36,11 +36,11 @@ void draw_fired_lasers(Context* context)
          double distance = FIRED_LASER_SPEED*(current_time - fired_lasers[i].fired_time);
          double laser_x = fired_lasers[i].fired_x + distance*cos(fired_lasers[i].fired_angle);
          double laser_y = fired_lasers[i].fired_y - distance*sin(fired_lasers[i].fired_angle);
-         int sx = (WIDTH / 2) - (int)(context->current_x - laser_x);
-         int sy = (HEIGHT / 2) - (int)(context->current_y - laser_y);
+         int sx = (screen_width / 2) - (int)(context->current_x - laser_x);
+         int sy = (screen_height / 2) - (int)(context->current_y - laser_y);
 
 
-         if (sx > 0 && sx < WIDTH && sy > 0 && sy < HEIGHT)
+         if (sx > 0 && sx < screen_width && sy > 0 && sy < screen_height)
          {
             al_draw_rectangle(sx-1, sy-1, sx+2, sy+2, al_color_name("lightgreen"), 0);
          }
@@ -78,7 +78,7 @@ void draw_ship_vehicle(Context* context)
 
    al_draw_scaled_rotated_bitmap(ship,
    		b_width / 2, b_height / 2, 
-   		WIDTH / 2, HEIGHT / 2, 
+   		screen_width / 2, screen_height / 2, 
    		scale_factor, scale_factor,
          (context->angle * -1) - M_PI_4, 0);
 }
