@@ -25,6 +25,9 @@ Notes:
 int, float: 32 bit
 long, double: 64 bit
 
+compile within container: sudo docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp dimastopel/allegro5 make
+
+
  */
 
 typedef struct {
