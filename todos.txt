@@ -1,4 +1,26 @@
 [on hold] 1. move all resoruces to part of executable (may be via makefile). like in ship.c. 
-3. create dialogs (check allegro built in)
-4. create more planets
+3. create dialogs [no allegro helpers]
 5. random planets generation?
+
+
+General ideas:
+
+Gravity:
+1. Create a gravity based game so that you have different, weird, objects with different gravity and spaceship is attracted to these planets. If you don't play right you can crash. 
+2. Consider planting prices to collect close to planets so that the player has to collect but not to crash. Prices give money. 
+3. You also have store where you can upgrade your ship with money you collected. 
+4. With better ship you can come to more complex / dangerous places. 
+
+Places:
+
+Neutrino stars
+Black holes
+Rotating black holes
+White dwarfs
+Stars
+x-ray pulsars
+Comets
+Supernovae
+Clusters
+Galaxies
+More: https://en.wikipedia.org/wiki/Lists_of_astronomical_objects

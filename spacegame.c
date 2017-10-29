@@ -105,6 +105,11 @@ void do_up(Context* context, int key_up)
    static double speed_v0 = 0;
    static double start_time = 0;
    static const double acceleration = 3.5;
+
+   static const int planet_x = 178223;
+   static const int planet_y = 101241;
+   static const int planet_mass = 50000;
+   static const int ship_mass = 20;
    
    if (context->speed == 0 && key_up)
    {
@@ -117,7 +122,6 @@ void do_up(Context* context, int key_up)
       speed_state = SPEED_STATIC; 
       return;
    }
-
 
    if (key_up) 
    {
@@ -142,17 +146,44 @@ void do_up(Context* context, int key_up)
    
    context->speed = speed_v0 + actual_acceleration*time_delta;
 
+   double distance_to_planet_squared =
+      fabs(context->current_x - planet_x)*fabs(context->current_x - planet_x) + 
+      fabs(context->current_y - planet_y)*fabs(context->current_y - planet_y);
+
+   double vec_grav_mag = planet_mass * ship_mass / distance_to_planet_squared;
+   
+   double vec_grav_angle = -1*atan2(planet_y - context->current_y, planet_x - context->current_x);
 
    if (context->speed > MAX_SHIP_SPEED)
    {
       context->speed = MAX_SHIP_SPEED;
    }
+ 
+
+   double temp_alpha = vec_grav_angle-context->angle; 
+   while (temp_alpha > M_PI)
+   {
+      temp_alpha -= M_PI;
+   }
+
+   while (temp_alpha < -M_PI)
+   {
+      temp_alpha += M_PI;
+   }
+
+   double final_vec_mag = sqrt(vec_grav_mag*vec_grav_mag + context->speed*context->speed + 2*vec_grav_mag*context->speed*cos(temp_alpha)); 
+   double final_vec_ang = context->angle + atan2(vec_grav_mag*sin(temp_alpha), context->speed + vec_grav_mag*cos(temp_alpha));
+
 
    //DEBUG
    //printf("%f %d %d %f %f\n", context->speed, speed_state, current_speed_state, actual_acceleration, speed_v0);
+   //printf("%.3f %.3f %.3f %.3f %.3f %.3f\n", final_vec_mag, final_vec_ang, vec_grav_mag, vec_grav_angle, context->speed, context->angle);
 
-   context->current_x += context->speed * cos(context->angle);
-   context->current_y -= context->speed * sin(context->angle);
+   //context->current_x += context->speed * cos(context->angle);
+   //context->current_y -= context->speed * sin(context->angle);
+
+   context->current_x += final_vec_mag * cos(final_vec_ang);
+   context->current_y -= final_vec_mag * sin(final_vec_ang);
 }
 
 void do_down(Context* context, int key_up)
