@@ -82,7 +82,7 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
 
    static int current_fire = 0;
 
-   al_init_timeout(&timeout, 1 / 50);
+   al_init_timeout(&timeout, 1.0 / FPS);
    al_wait_for_event_until(event_queue, &ev, &timeout);
 
    if(ev.type == ALLEGRO_EVENT_KEY_DOWN && ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE) 
@@ -97,6 +97,7 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
    do_up(context, !current_up);
    do_down(context, !current_down);
    do_fire(context, !current_fire);
+   do_move(context);
 
    if(ev.type == ALLEGRO_EVENT_KEY_DOWN) {
       switch(ev.keyboard.keycode) {

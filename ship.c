@@ -74,7 +74,7 @@ void draw_ship_vehicle(Context* context)
    	   b_height = al_get_bitmap_height(ship_fire);
    }
 
-   ship = context->is_accelerating ? ship_fire : ship_nofire;
+   ship = context->rear_engine_on ? ship_fire : ship_nofire;
 
    al_draw_scaled_rotated_bitmap(ship,
    		b_width / 2, b_height / 2, 

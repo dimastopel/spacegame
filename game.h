@@ -7,6 +7,7 @@
 #define SCROLL_VELOCITY 5
 #define ANGULAR_VELOCITY (M_PI / 100)
 #define MAX_SHIP_SPEED 10
+#define FPS 50
 
 //#define WIDTH  1000
 //#define HEIGHT 1000
@@ -33,9 +34,12 @@ compile within container: sudo docker run --rm -v "$PWD":/usr/src/myapp -w /usr/
 typedef struct {
 	double current_x;
 	double current_y;
-	int is_accelerating;
+	int front_engine_on;
+	int rear_engine_on;
 	float angle;
-	float speed;
+	//float speed;
+	float speed_x;
+	float speed_y;
 } Context;
 
 

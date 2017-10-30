@@ -52,4 +52,9 @@ void draw_hud(Context* context)
         location_hud_y + 4*LOC_HUD_MARGIN_TEXT_HEIGHT + 3*FONT_SIZE, 
         0, 
         "Alpha: %3.2f", radians_to_degrees(context->angle));
+    al_draw_textf(get_font(), al_color_name("white"), 
+        location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
+        location_hud_y + 5*LOC_HUD_MARGIN_TEXT_HEIGHT + 4*FONT_SIZE, 
+        0, 
+        "Speed: %3.2f", sqrt(pow(context->speed_x,2) + pow(context->speed_y,2)));
 }

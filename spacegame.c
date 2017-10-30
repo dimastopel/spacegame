@@ -98,94 +98,80 @@ void do_right(Context* context, int key_up)
    }
 }
 
-void do_up(Context* context, int key_up)
+void do_move(Context* context)
 {
-   static SpeedState speed_state = SPEED_STATIC;
-   static SpeedState current_speed_state = SPEED_STATIC;
-   static double speed_v0 = 0;
-   static double start_time = 0;
-   static const double acceleration = 3.5;
-
    static const int planet_x = 178223;
    static const int planet_y = 101241;
-   static const int planet_mass = 50000;
-   static const int ship_mass = 20;
-   
-   if (context->speed == 0 && key_up)
-   {
-      return;
-   }
+   static const int planet_mass = 100000000;
 
-   if (key_up && context->speed < 0.001)
-   {
-      context->speed = 0;
-      speed_state = SPEED_STATIC; 
-      return;
-   }
+   static const int ship_mass = 10;
+   static const int ship_rear_engine = 1000;
+   static const int ship_front_engine = 50;
 
-   if (key_up) 
-   {
-      speed_state = SPEED_DECREASING;
-      context->is_accelerating = 0;
-   }
-   else
-   {
-      speed_state = SPEED_INCREASING;
-      context->is_accelerating = 1;
-   }
-
-   if (current_speed_state != speed_state)
-   {
-      start_time = al_get_time();
-      current_speed_state = speed_state;
-      speed_v0 = context->speed;
-   }
-
-   double time_delta = al_get_time() - start_time;
-   double actual_acceleration = speed_state == SPEED_INCREASING ? acceleration : (-1 * acceleration);
-   
-   context->speed = speed_v0 + actual_acceleration*time_delta;
-
+   // gravity force vector
    double distance_to_planet_squared =
       fabs(context->current_x - planet_x)*fabs(context->current_x - planet_x) + 
       fabs(context->current_y - planet_y)*fabs(context->current_y - planet_y);
 
    double vec_grav_mag = planet_mass * ship_mass / distance_to_planet_squared;
+   double vec_grav_angle = -1 * atan2(planet_y - context->current_y, planet_x - context->current_x);
    
-   double vec_grav_angle = -1*atan2(planet_y - context->current_y, planet_x - context->current_x);
-
-   if (context->speed > MAX_SHIP_SPEED)
+   // engine force vector
+   double vec_engine_mag = context->rear_engine_on ? ship_rear_engine : 0;  
+   double vec_engine_angle = context->front_engine_on ? (context->angle + M_PI) : context->angle;  
+   if (vec_engine_angle > 2*M_PI)
    {
-      context->speed = MAX_SHIP_SPEED;
+      vec_engine_angle -= 2*M_PI;
    }
- 
 
-   double temp_alpha = vec_grav_angle-context->angle; 
+   if (context->front_engine_on) 
+   {
+      vec_engine_mag -= ship_front_engine;
+      vec_engine_mag = fabs(vec_engine_mag);
+   }
+
+   // combine all forces
+   double temp_alpha = vec_grav_angle-vec_engine_angle; 
    while (temp_alpha > M_PI)
    {
-      temp_alpha -= M_PI;
+      temp_alpha -= 2*M_PI;
    }
 
-   while (temp_alpha < -M_PI)
+   while (temp_alpha < (-1*M_PI))
    {
-      temp_alpha += M_PI;
+      temp_alpha += 2*M_PI;
    }
 
-   double final_vec_mag = sqrt(vec_grav_mag*vec_grav_mag + context->speed*context->speed + 2*vec_grav_mag*context->speed*cos(temp_alpha)); 
-   double final_vec_ang = context->angle + atan2(vec_grav_mag*sin(temp_alpha), context->speed + vec_grav_mag*cos(temp_alpha));
+   double final_vec_mag = sqrt(vec_grav_mag*vec_grav_mag + vec_engine_mag*vec_engine_mag + 2*vec_grav_mag*vec_engine_mag*cos(temp_alpha)); 
+   double final_vec_ang = vec_engine_angle + atan2(vec_grav_mag*sin(temp_alpha), vec_engine_mag + vec_grav_mag*cos(temp_alpha));
 
+   /*
+   double final_vec_mag = vec_engine_mag;
+   double final_vec_ang = vec_engine_angle;
+   */
+
+   //calculate acceleration and velocity
+   double acceleration = final_vec_mag / ship_mass;
+   double acceleration_x = acceleration*cos(final_vec_ang);
+   double acceleration_y = -1*acceleration*sin(final_vec_ang);
+
+   context->speed_x += acceleration_x * (1.0/FPS);
+   context->speed_y += acceleration_y * (1.0/FPS);
+
+   context->current_x += context->speed_x * (1.0/FPS); 
+   context->current_y += context->speed_y * (1.0/FPS); 
 
    //DEBUG
    //printf("%f %d %d %f %f\n", context->speed, speed_state, current_speed_state, actual_acceleration, speed_v0);
-   //printf("%.3f %.3f %.3f %.3f %.3f %.3f\n", final_vec_mag, final_vec_ang, vec_grav_mag, vec_grav_angle, context->speed, context->angle);
+   //printf("%.3f %.3f %.3f %.3f %.3f %.3f\n", final_vec_mag, final_vec_ang, vec_engine_mag, vec_engine_angle, vec_grav_mag, vec_grav_angle);
+}
 
-   //context->current_x += context->speed * cos(context->angle);
-   //context->current_y -= context->speed * sin(context->angle);
-
-   context->current_x += final_vec_mag * cos(final_vec_ang);
-   context->current_y -= final_vec_mag * sin(final_vec_ang);
+void do_up(Context* context, int key_up)
+{
+   context->rear_engine_on = !key_up;
 }
 
 void do_down(Context* context, int key_up)
 {
+   context->front_engine_on = !key_up;
 }

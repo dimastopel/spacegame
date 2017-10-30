@@ -19,4 +19,7 @@ void do_down(Context* context, int key_up);
 // ship fire callback
 void do_fire(Context* context, int key_up);
 
+// process movement
+void do_move(Context* context);
+
 #endif
