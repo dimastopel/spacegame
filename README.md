@@ -12,5 +12,5 @@ $ ./spacegame
 ```
 You can compile with no dependencies using Docker: 
 
-`sudo docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp dimastopel/allegro5 make`
+`docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp dimastopel/allegro5 make`
 
