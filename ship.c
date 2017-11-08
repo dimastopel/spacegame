@@ -53,6 +53,7 @@ void draw_ship_vehicle(Context* context)
    static ALLEGRO_BITMAP* ship = NULL;
 
    static ALLEGRO_BITMAP* ship_fire = NULL;
+   static ALLEGRO_BITMAP* ship_front_fire = NULL;
    static ALLEGRO_BITMAP* ship_nofire = NULL;
 
    static int b_width = 0;
@@ -62,6 +63,7 @@ void draw_ship_vehicle(Context* context)
    if (!ship)
    {
          ship_fire = al_load_bitmap("res/ship_fire.png");
+         ship_front_fire = al_load_bitmap("res/ship_front_fire.png");
          ship_nofire = al_load_bitmap("res/ship_nofire.png");
          ship = ship_nofire;
 
@@ -74,7 +76,15 @@ void draw_ship_vehicle(Context* context)
    	   b_height = al_get_bitmap_height(ship_fire);
    }
 
-   ship = context->rear_engine_on ? ship_fire : ship_nofire;
+   
+   if (context->rear_engine_on)
+   {
+      ship = ship_fire;
+   }
+   else
+   {
+      ship = context->front_engine_on ? ship_front_fire : ship_nofire;
+   }
 
    al_draw_scaled_rotated_bitmap(ship,
    		b_width / 2, b_height / 2, 
