@@ -100,60 +100,46 @@ void do_right(Context* context, int key_up)
 
 void do_move(Context* context)
 {
-   static const int planet_x = 178223;
-   static const int planet_y = 101241;
-   static const int planet_mass = 100000000;
-
    static const int ship_mass = 10;
-   static const int ship_rear_engine = 1000;
-   static const int ship_front_engine = 50;
+   static const int ship_rear_engine = 3000;
+   static const int ship_front_engine = 1000;
 
    // gravity force vector
-   double distance_to_planet_squared =
-      fabs(context->current_x - planet_x)*fabs(context->current_x - planet_x) + 
-      fabs(context->current_y - planet_y)*fabs(context->current_y - planet_y);
+   Vector force_gravity = {0};
+   for (int i = 0; i < sizeof(space_objects)/sizeof(SpaceObject); i++)
+   {
+      double distance_to_planet_squared =
+         pow(context->current_x - space_objects[i].center_x, 2) + 
+         pow(context->current_y - space_objects[i].center_y, 2);
 
-   double vec_grav_mag = planet_mass * ship_mass / distance_to_planet_squared;
-   double vec_grav_angle = -1 * atan2(planet_y - context->current_y, planet_x - context->current_x);
-   
+      double force_mag = space_objects[i].mass * ship_mass / distance_to_planet_squared;
+
+      double distance_to_planet = sqrt(distance_to_planet_squared);
+      force_gravity.x += force_mag*(space_objects[i].center_x - context->current_x)/distance_to_planet;
+      force_gravity.y += force_mag*(space_objects[i].center_y - context->current_y)/distance_to_planet;
+   }
+
    // engine force vector
-   double vec_engine_mag = context->rear_engine_on ? ship_rear_engine : 0;  
-   double vec_engine_angle = context->front_engine_on ? (context->angle + M_PI) : context->angle;  
-   if (vec_engine_angle > 2*M_PI)
+   Vector force_engine = {0};
+   if (context->rear_engine_on)
    {
-      vec_engine_angle -= 2*M_PI;
+      force_engine.x = ship_rear_engine * cos(context->angle);
+      force_engine.y = -1 * ship_rear_engine * sin(context->angle);
+   }
+   if (context->front_engine_on)
+   {
+      force_engine.x -= ship_front_engine * cos(context->angle);
+      force_engine.y -= -1 * ship_front_engine * sin(context->angle);
    }
 
-   if (context->front_engine_on) 
-   {
-      vec_engine_mag -= ship_front_engine;
-      vec_engine_mag = fabs(vec_engine_mag);
-   }
-
-   // combine all forces
-   double temp_alpha = vec_grav_angle-vec_engine_angle; 
-   while (temp_alpha > M_PI)
-   {
-      temp_alpha -= 2*M_PI;
-   }
-
-   while (temp_alpha < (-1*M_PI))
-   {
-      temp_alpha += 2*M_PI;
-   }
-
-   double final_vec_mag = sqrt(vec_grav_mag*vec_grav_mag + vec_engine_mag*vec_engine_mag + 2*vec_grav_mag*vec_engine_mag*cos(temp_alpha)); 
-   double final_vec_ang = vec_engine_angle + atan2(vec_grav_mag*sin(temp_alpha), vec_engine_mag + vec_grav_mag*cos(temp_alpha));
-
-   /*
-   double final_vec_mag = vec_engine_mag;
-   double final_vec_ang = vec_engine_angle;
-   */
+   // final vector
+   Vector force_combined;
+   force_combined.x = force_gravity.x + force_engine.x;
+   force_combined.y = force_gravity.y + force_engine.y;
 
    //calculate acceleration and velocity
-   double acceleration = final_vec_mag / ship_mass;
-   double acceleration_x = acceleration*cos(final_vec_ang);
-   double acceleration_y = -1*acceleration*sin(final_vec_ang);
+   double acceleration_x = force_combined.x / ship_mass;
+   double acceleration_y = force_combined.y / ship_mass;
 
    context->speed_x += acceleration_x * (1.0/FPS);
    context->speed_y += acceleration_y * (1.0/FPS);

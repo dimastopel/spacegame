@@ -17,8 +17,6 @@ int screen_height;
 
 #define FONT_SIZE 10
 
-
-
 /*
 
 Notes:
@@ -29,7 +27,12 @@ long, double: 64 bit
 compile within container: sudo docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp dimastopel/allegro5 make
 
 
- */
+*/
+
+typedef struct {
+	double x;
+	double y;
+} Vector;
 
 typedef struct {
 	double current_x;
@@ -41,7 +44,6 @@ typedef struct {
 	float speed_x;
 	float speed_y;
 } Context;
-
 
 #endif
 

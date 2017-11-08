@@ -1,29 +1,20 @@
-   #include <allegro5/allegro.h>
+#include <allegro5/allegro.h>
 
 #include <math.h>
 
 #include "world.h"
 #include "utils.h"
 
-typedef enum {
-   MOVE_TYPE_STATIC,
-   MOVE_TYPE_CIRCLE,
-   MOVE_TYPE_VERTICAL,
-   MOVE_TYPE_HORIZONTAL
-} SpaceObjectMovement;
+SpaceObject space_objects[100] = {0};
 
-typedef struct {
-   double center_x;
-   double center_y;
-   ALLEGRO_BITMAP* resource;
-   SpaceObjectMovement move_type;
-   float scale_factor;
-   int move_span;
-   float initial_angle;
-   int is_rotating;
-} SpaceObject;
-
-static SpaceObject space_objects[4];
+char* static_planets[] = {
+   //"res/planet3.png",
+   "res/double-ringed-orb.png",
+   "res/jupiter.png",
+   "res/sun.png",
+   "res/orbit.png",
+   "res/planet-core.png",
+   "res/world.png"};
 
 void draw_space_object(Context* context, SpaceObject* space_object, double time)
 {
@@ -78,15 +69,22 @@ void draw_world(Context* context)
 
    for (int i = 0; i < sizeof(space_objects) / sizeof(SpaceObject); i++)
    {
+      if (space_objects[i].resource == NULL)
+      {
+         break;
+      }
+
       draw_space_object(context, &space_objects[i], time);
    }
 }
 
 void load_world()
 {
+
    SpaceObject boring_planet;
    boring_planet.center_x = 178223;
    boring_planet.center_y = 101241;
+   boring_planet.mass = 150000000;
    boring_planet.resource = al_load_bitmap("res/planet3.png");
    boring_planet.move_type = MOVE_TYPE_STATIC;
    boring_planet.scale_factor = 0.3;
@@ -95,37 +93,72 @@ void load_world()
    boring_planet.is_rotating = 0;
    space_objects[0] = boring_planet;
 
+   SpaceObject boring_planet_2;
+   boring_planet_2.center_x = 177223;
+   boring_planet_2.center_y = 101241;
+   boring_planet_2.mass = 150000000;
+   boring_planet_2.resource = al_load_bitmap("res/planet3.png");
+   boring_planet_2.move_type = MOVE_TYPE_STATIC;
+   boring_planet_2.scale_factor = 0.3;
+   boring_planet_2.move_span = 0;
+   boring_planet_2.initial_angle = -M_PI_4;
+   boring_planet_2.is_rotating = 0;
+   space_objects[1] = boring_planet_2;
+
    SpaceObject spoutnik;
    spoutnik.center_x = 177223;
    spoutnik.center_y = 101441;
+   spoutnik.mass = 100000;
    spoutnik.resource = al_load_bitmap("res/spoutnik.png");
    spoutnik.move_type = MOVE_TYPE_CIRCLE;
    spoutnik.scale_factor = 0.4;
    spoutnik.move_span = 200;
    spoutnik.initial_angle = M_PI_2 + M_PI_4 + M_PI_2;
    spoutnik.is_rotating = 1;
-   space_objects[1] = spoutnik;
+   space_objects[2] = spoutnik;
 
    SpaceObject weird_ship;
    weird_ship.center_x = 178203;
    weird_ship.center_y = 100421;
+   weird_ship.mass = 100000;
    weird_ship.resource = al_load_bitmap("res/ship.png");
    weird_ship.move_type = MOVE_TYPE_HORIZONTAL;
    weird_ship.scale_factor = 0.1;
    weird_ship.move_span = 500;
    weird_ship.initial_angle = 0;
    weird_ship.is_rotating = 0;
-   space_objects[2] = weird_ship;
+   space_objects[3] = weird_ship;
 
    SpaceObject weird_planet;
    weird_planet.center_x = 179203;
    weird_planet.center_y = 101321;
+   weird_planet.mass = 15000000;
    weird_planet.resource = al_load_bitmap("res/planet3.png");
    weird_planet.move_type = MOVE_TYPE_VERTICAL;
    weird_planet.scale_factor = 0.2;
    weird_planet.move_span = 400;
    weird_planet.initial_angle = 0;
    weird_planet.is_rotating = 1;
-   space_objects[3] = weird_planet;
+   space_objects[4] = weird_planet;
+
+   int num_of_random_planets = 3;
+   for (int i = 0; i < num_of_random_planets; i++)
+   {
+      size_t res_size = sizeof(static_planets) / sizeof(char*);
+      char* res = static_planets[rand() % res_size];
+      int spread = 5000;
+      
+      SpaceObject planet;
+      planet.center_x = 178223 + (rand() % spread) - (spread / 2);
+      planet.center_y = 101241 + (rand() % spread) - (spread / 2);;
+      planet.mass = 150000000 + (rand() % 50000000 - 25000000);
+      planet.resource = al_load_bitmap(res);
+      planet.move_type = MOVE_TYPE_STATIC;
+      planet.scale_factor = 0.3;
+      planet.move_span = 0;
+      planet.initial_angle = 0;
+      planet.is_rotating = 0;
+      space_objects[5+i] = planet;
+   }
 }
 
