@@ -129,18 +129,45 @@ void load_world()
    weird_ship.is_rotating = 0;
    space_objects[3] = weird_ship;
 
-   SpaceObject weird_planet;
-   weird_planet.center_x = 179203;
-   weird_planet.center_y = 101321;
-   weird_planet.mass = 15000000;
-   weird_planet.resource = al_load_bitmap("res/planet3.png");
-   weird_planet.move_type = MOVE_TYPE_VERTICAL;
-   weird_planet.scale_factor = 0.2;
-   weird_planet.move_span = 400;
-   weird_planet.initial_angle = 0;
-   weird_planet.is_rotating = 1;
-   space_objects[4] = weird_planet;
+   SpaceObject triple_cluster_1;
+   triple_cluster_1.center_x = 177723;
+   triple_cluster_1.center_y = 101441;
+   triple_cluster_1.mass = 150000000;
+   triple_cluster_1.resource = al_load_bitmap("res/sun.png");
+   triple_cluster_1.move_type = MOVE_TYPE_VERTICAL;
+   triple_cluster_1.scale_factor = 0.3;
+   triple_cluster_1.move_span = 400;
+   triple_cluster_1.initial_angle = 0;
+   triple_cluster_1.is_rotating = 1;
+   space_objects[4] = triple_cluster_1;
 
+
+   /*
+   SpaceObject triple_cluster_2;
+   triple_cluster_2.center_x = 179923;
+   triple_cluster_2.center_y = 102041;
+   triple_cluster_2.mass = 150000000;
+   triple_cluster_2.resource = al_load_bitmap("res/sun.png");
+   triple_cluster_2.move_type = MOVE_TYPE_STATIC;
+   triple_cluster_2.scale_factor = 0.3;
+   triple_cluster_2.move_span = 0;
+   triple_cluster_2.initial_angle = 0;
+   triple_cluster_2.is_rotating = 0;
+   space_objects[5] = triple_cluster_2;
+
+   SpaceObject triple_cluster_3;
+   triple_cluster_3.center_x = 179423;
+   triple_cluster_3.center_y = 102241;
+   triple_cluster_3.mass = 150000000;
+   triple_cluster_3.resource = al_load_bitmap("res/sun.png");
+   triple_cluster_3.move_type = MOVE_TYPE_STATIC;
+   triple_cluster_3.scale_factor = 0.3;
+   triple_cluster_3.move_span = 0;
+   triple_cluster_3.initial_angle = 0;
+   triple_cluster_3.is_rotating = 0;
+   space_objects[6] = triple_cluster_3;
+   */
+   /*
    int num_of_random_planets = 3;
    for (int i = 0; i < num_of_random_planets; i++)
    {
@@ -160,5 +187,6 @@ void load_world()
       planet.is_rotating = 0;
       space_objects[5+i] = planet;
    }
+   */
 }
 
