@@ -6,6 +6,7 @@
 
 #define SCROLL_VELOCITY 5
 #define ANGULAR_VELOCITY (M_PI / 100)
+#define HORIZONTAL_VELOCITY 5
 #define MAX_SHIP_SPEED 10
 #define FPS 50
 
@@ -29,21 +30,32 @@ compile within container: sudo docker run --rm -v "$PWD":/usr/src/myapp -w /usr/
 
 */
 
+
 typedef struct {
 	double x;
 	double y;
 } Vector;
 
+
+//Player context
 typedef struct {
 	double current_x;
 	double current_y;
-	int front_engine_on;
-	int rear_engine_on;
+	unsigned int engine_on;
 	float angle;
 	//float speed;
 	float speed_x;
 	float speed_y;
 } Context;
+
+// Engine
+#define FRONT_ENGINE 1
+#define REAR_ENGINE 2
+#define RIGHT_ENGINE 4
+#define LEFT_ENGINE 8
+
+void engine_on(Context* context, unsigned char engine, unsigned int on);
+unsigned int is_engine_on(Context* context, unsigned char engine);
 
 #endif
 

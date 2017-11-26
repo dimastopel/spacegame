@@ -81,6 +81,7 @@ void draw_world(Context* context)
 void load_world()
 {
 
+   /*
    SpaceObject boring_planet;
    boring_planet.center_x = 178223;
    boring_planet.center_y = 101241;
@@ -140,7 +141,7 @@ void load_world()
    triple_cluster_1.initial_angle = 0;
    triple_cluster_1.is_rotating = 1;
    space_objects[4] = triple_cluster_1;
-
+   */
 
    /*
    SpaceObject triple_cluster_2;

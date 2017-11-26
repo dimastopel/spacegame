@@ -46,7 +46,7 @@ int main(int argc, char **argv){
    //ALLEGRO_SAMPLE* sample = al_load_sample("res/TheForestAwakes.ogg");
    //al_play_sample(sample, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
    load_world();
-   Context context = {177223,102241,0,0,0};
+   Context context = {177223,102241,0,M_PI_2,0,0};
 
    while (true)
    {
@@ -72,37 +72,20 @@ int main(int argc, char **argv){
 
 void do_left(Context* context, int key_up)
 {
-   if (key_up)
-   {
-      return;
-   }
-
-   context->angle += ANGULAR_VELOCITY;
-   if (context->angle > 2*M_PI)
-   {
-   		context->angle -= 2*M_PI;
-   }
+   engine_on(context, LEFT_ENGINE, !key_up);
 }
 
 void do_right(Context* context, int key_up)
 {
-   if (key_up)
-   {
-      return;
-   }
-
-   context->angle -= ANGULAR_VELOCITY;
-   if (context->angle < 0)
-   {
-   		context->angle += 2*M_PI;
-   }
+   engine_on(context, RIGHT_ENGINE, !key_up);
 }
 
 void do_move(Context* context)
 {
    static const int ship_mass = 10;
-   static const int ship_rear_engine = 9000; /*was 3000*/
-   static const int ship_front_engine = 1000;
+   static const int ship_rear_engine = 5000; /*was 3000*/
+   static const int ship_front_engine = 5000;
+   static const int ship_side_engine = 20000;
 
    // gravity force vector
    Vector force_gravity = {0};
@@ -121,15 +104,23 @@ void do_move(Context* context)
 
    // engine force vector
    Vector force_engine = {0};
-   if (context->rear_engine_on)
+   if (is_engine_on(context, REAR_ENGINE))
    {
       force_engine.x = ship_rear_engine * cos(context->angle);
       force_engine.y = -1 * ship_rear_engine * sin(context->angle);
    }
-   if (context->front_engine_on)
+   if (is_engine_on(context, FRONT_ENGINE))
    {
       force_engine.x -= ship_front_engine * cos(context->angle);
       force_engine.y -= -1 * ship_front_engine * sin(context->angle);
+   }
+   if (is_engine_on(context, RIGHT_ENGINE))
+   {
+      force_engine.x += ship_side_engine;
+   }
+   if (is_engine_on(context, LEFT_ENGINE))
+   {
+      force_engine.x -= ship_side_engine;
    }
 
    // final vector
@@ -154,10 +145,10 @@ void do_move(Context* context)
 
 void do_up(Context* context, int key_up)
 {
-   context->rear_engine_on = !key_up;
+   engine_on(context, REAR_ENGINE, !key_up);
 }
 
 void do_down(Context* context, int key_up)
 {
-   context->front_engine_on = !key_up;
+   engine_on(context, FRONT_ENGINE, !key_up);
 }
