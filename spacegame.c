@@ -101,7 +101,7 @@ void do_right(Context* context, int key_up)
 void do_move(Context* context)
 {
    static const int ship_mass = 10;
-   static const int ship_rear_engine = 3000;
+   static const int ship_rear_engine = 9000; /*was 3000*/
    static const int ship_front_engine = 1000;
 
    // gravity force vector
