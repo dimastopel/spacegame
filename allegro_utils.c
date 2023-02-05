@@ -145,5 +145,16 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
 
 }
 
+void get_allegro_version(char* out)
+{
+   uint32_t version = al_get_allegro_version();
+   int major = version >> 24;
+   int minor = (version >> 16) & 255;
+   int revision = (version >> 8) & 255;
+   int release = version & 255;
+
+   sprintf(out, "%d.%d.%d.%d", major, minor, revision, release);
+}
+
 
 

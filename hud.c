@@ -17,6 +17,7 @@ void draw_hud(Context* context)
 {
     int loc_hud_width = screen_width / 100 * 20;
     int loc_hud_height = screen_height / 100 * 8;
+    char ver[50];
 	
     int location_hud_x = screen_width - loc_hud_width - LOC_HUD_MARGIN_WIDTH;
 	int location_hud_y = screen_height - loc_hud_height - LOC_HUD_MARGIN_HEIGHT;
@@ -57,4 +58,12 @@ void draw_hud(Context* context)
         location_hud_y + 5*LOC_HUD_MARGIN_TEXT_HEIGHT + 4*FONT_SIZE, 
         0, 
         "Speed: %3.2f", sqrt(pow(context->speed_x,2) + pow(context->speed_y,2)));
+
+    get_allegro_version(ver);
+    al_draw_textf(get_font(), al_color_name("white"), 
+        location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
+        location_hud_y + 6*LOC_HUD_MARGIN_TEXT_HEIGHT + 5*FONT_SIZE, 
+        0, 
+        "Alg ver: %s", ver);
+
 }
