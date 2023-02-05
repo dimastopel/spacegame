@@ -11,8 +11,8 @@
 
 //#define WIDTH  1000
 //#define HEIGHT 1000
-int screen_width;
-int screen_height;
+extern int screen_width;
+extern int screen_height;
 
 
 #define FONT_SIZE 10

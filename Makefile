@@ -23,7 +23,8 @@ LDIR   =.
 
 # All libs
 #LIBS   =-lm `pkg-config --cflags --libs allegro-5.0 allegro_acodec-5.0 allegro_audio-5.0 allegro_color-5.0 allegro_dialog-5.0 allegro_font-5.0 allegro_image-5.0 allegro_main-5.0 allegro_memfile-5.0 allegro_physfs-5.0 allegro_primitives-5.0 allegro_ttf-5.0`
-LIBS   =-lm `pkg-config --cflags --libs allegro-5.0 allegro_acodec-5.0 allegro_audio-5.0 allegro_color-5.0 allegro_font-5.0 allegro_image-5.0 allegro_memfile-5.0 allegro_primitives-5.0 allegro_ttf-5.0`
+#LIBS   =-lm `pkg-config --cflags --libs allegro-5.0 allegro_acodec-5.0 allegro_audio-5.0 allegro_color-5.0 allegro_font-5.0 allegro_image-5.0 allegro_memfile-5.0 allegro_primitives-5.0 allegro_ttf-5.0`
+LIBS   =-lm `pkg-config --cflags --libs allegro-5 allegro_acodec-5 allegro_audio-5 allegro_color-5 allegro_font-5 allegro_image-5 allegro_memfile-5 allegro_primitives-5 allegro_ttf-5`
 DEPS   =allegro_utils.h  game.h  hud.h  ship.h  stars.h  utils.h  world.h
 OBJ    =spacegame.o allegro_utils.o utils.o stars.o hud.o ship.o world.o
 
