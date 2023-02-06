@@ -82,8 +82,8 @@ void load_world()
 {
 
    SpaceObject boring_planet;
-   boring_planet.center_x = 178223;
-   boring_planet.center_y = 101241;
+   boring_planet.center_x = 200000;
+   boring_planet.center_y = 60000;
    boring_planet.mass = 150000000;
    boring_planet.resource = al_load_bitmap("res/planet3.png");
    boring_planet.move_type = MOVE_TYPE_STATIC;
@@ -94,8 +94,8 @@ void load_world()
    space_objects[0] = boring_planet;
 
    SpaceObject boring_planet_2;
-   boring_planet_2.center_x = 177223;
-   boring_planet_2.center_y = 101241;
+   boring_planet_2.center_x = 150000;
+   boring_planet_2.center_y = 70000;
    boring_planet_2.mass = 150000000;
    boring_planet_2.resource = al_load_bitmap("res/planet3.png");
    boring_planet_2.move_type = MOVE_TYPE_STATIC;
@@ -106,8 +106,8 @@ void load_world()
    space_objects[1] = boring_planet_2;
 
    SpaceObject spoutnik;
-   spoutnik.center_x = 177223;
-   spoutnik.center_y = 101441;
+   spoutnik.center_x = 250000;
+   spoutnik.center_y = 110000;
    spoutnik.mass = 100000;
    spoutnik.resource = al_load_bitmap("res/spoutnik.png");
    spoutnik.move_type = MOVE_TYPE_CIRCLE;
@@ -118,8 +118,8 @@ void load_world()
    space_objects[2] = spoutnik;
 
    SpaceObject weird_ship;
-   weird_ship.center_x = 178203;
-   weird_ship.center_y = 100421;
+   weird_ship.center_x = 135000;
+   weird_ship.center_y = 100000;
    weird_ship.mass = 100000;
    weird_ship.resource = al_load_bitmap("res/ship.png");
    weird_ship.move_type = MOVE_TYPE_HORIZONTAL;
@@ -130,8 +130,8 @@ void load_world()
    space_objects[3] = weird_ship;
 
    SpaceObject triple_cluster_1;
-   triple_cluster_1.center_x = 177723;
-   triple_cluster_1.center_y = 101441;
+   triple_cluster_1.center_x = 90000;
+   triple_cluster_1.center_y = 110000;
    triple_cluster_1.mass = 150000000;
    triple_cluster_1.resource = al_load_bitmap("res/sun.png");
    triple_cluster_1.move_type = MOVE_TYPE_VERTICAL;
