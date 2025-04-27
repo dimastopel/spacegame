@@ -22,6 +22,9 @@ void do_fire(Context* context, int key_up);
 // process movement
 void do_move(Context* context);
 
+// process fuel
+void do_fuel(Context* context);
+
 // gets the compiled allegro version
 void get_allegro_version(char* out);
 

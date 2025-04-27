@@ -40,7 +40,7 @@ ALLEGRO_DISPLAY* create_display()
 
    // add margin
    screen_width -= 70;
-   screen_height -= 60;
+   screen_height -= 220;
 
    ALLEGRO_DISPLAY *display = NULL;
    display = al_create_display(screen_width, screen_height);
@@ -98,6 +98,7 @@ void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
    do_down(context, !current_down);
    do_fire(context, !current_fire);
    do_move(context);
+   do_fuel(context);
 
    if(ev.type == ALLEGRO_EVENT_KEY_DOWN) {
       switch(ev.keyboard.keycode) {

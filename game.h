@@ -15,7 +15,7 @@ extern int screen_width;
 extern int screen_height;
 
 
-#define FONT_SIZE 10
+#define FONT_SIZE 20
 
 /*
 
@@ -43,6 +43,7 @@ typedef struct {
 	//float speed;
 	float speed_x;
 	float speed_y;
+	float fuel;
 } Context;
 
 #endif

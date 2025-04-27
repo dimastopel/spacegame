@@ -77,13 +77,20 @@ void draw_ship_vehicle(Context* context)
    }
 
    
-   if (context->rear_engine_on)
+   if (context->rear_engine_on && context-> fuel > 0)
    {
       ship = ship_fire;
    }
    else
    {
-      ship = context->front_engine_on ? ship_front_fire : ship_nofire;
+      if (context->front_engine_on && context-> fuel > 0)
+      {
+         ship = ship_front_fire;
+      }
+      else
+      {
+         ship = ship_nofire;
+      } 
    }
 
    al_draw_scaled_rotated_bitmap(ship,

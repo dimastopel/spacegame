@@ -16,7 +16,7 @@
 void draw_hud(Context* context)
 {
     int loc_hud_width = screen_width / 100 * 20;
-    int loc_hud_height = screen_height / 100 * 8;
+    int loc_hud_height = screen_height / 100 * 13;
     char ver[50];
 	
     int location_hud_x = screen_width - loc_hud_width - LOC_HUD_MARGIN_WIDTH;
@@ -66,4 +66,9 @@ void draw_hud(Context* context)
         0, 
         "Alg ver: %s", ver);
 
+    al_draw_textf(get_font(), al_color_name("white"), 
+    location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
+    location_hud_y + 7*LOC_HUD_MARGIN_TEXT_HEIGHT + 6*FONT_SIZE, 
+    0, 
+    "Fuel: %3.2f", context->fuel);
 }
