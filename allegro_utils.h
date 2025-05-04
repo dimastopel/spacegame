@@ -1,8 +1,13 @@
 #include "game.h"
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_native_dialog.h>
+
 
 #ifndef _ALLEGRO_HELPERS_
 #define _ALLEGRO_HELPERS_
+
+extern ALLEGRO_DISPLAY* display;
+
 
 void init_allegro();
 ALLEGRO_DISPLAY* create_display();
@@ -27,6 +32,10 @@ void do_fuel(Context* context);
 
 // gets the compiled allegro version
 void get_allegro_version(char* out);
+
+// display message box
+void display_message_box(char* msg);
+
 
 
 #endif

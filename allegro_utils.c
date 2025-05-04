@@ -13,6 +13,7 @@
 
 int screen_width;
 int screen_height;
+ALLEGRO_DISPLAY* display;
 
 void init_allegro()
 {
@@ -28,6 +29,7 @@ void init_allegro()
    al_init_acodec_addon();
    al_init_font_addon();
    al_init_ttf_addon();
+   al_init_native_dialog_addon();
 }
 
 ALLEGRO_DISPLAY* create_display()
@@ -49,6 +51,8 @@ ALLEGRO_DISPLAY* create_display()
       fprintf(stderr, "failed to create display!\n");
       exit(1);
    }
+   printf("display orig %p\n", display);
+
 
    return display;
 }
@@ -68,6 +72,7 @@ void shut_down_allegro(ALLEGRO_DISPLAY* display)
 {
    al_destroy_display(display);
    al_shutdown_primitives_addon();
+   al_shutdown_native_dialog_addon();
 }
 
 void process_events(ALLEGRO_EVENT_QUEUE* event_queue, Context* context)
@@ -157,5 +162,13 @@ void get_allegro_version(char* out)
    sprintf(out, "%d.%d.%d.%d", major, minor, revision, release);
 }
 
-
-
+void display_message_box(char* msg)
+{
+   al_show_native_message_box(display, 
+      "Title1", 
+      "Heading1", 
+      "Text1 fuel out!", 
+      NULL,
+      ALLEGRO_MESSAGEBOX_YES_NO
+   );
+}

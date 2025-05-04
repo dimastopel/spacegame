@@ -36,7 +36,7 @@ int main(int argc, char **argv){
 
    init();   
 
-   ALLEGRO_DISPLAY *display = create_display();
+   display = create_display();
 
    ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
    al_register_event_source(event_queue, al_get_keyboard_event_source());
@@ -177,6 +177,6 @@ void do_fuel(Context* context)
    if (context->fuel <= 0)
    {
       context->fuel = 0;
-      return;   
+      //display_message_box("test");
    }
 }

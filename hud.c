@@ -12,6 +12,7 @@
 #define LOC_HUD_MARGIN_HEIGHT 20
 #define LOC_HUD_MARGIN_TEXT_WIDTH 2
 #define LOC_HUD_MARGIN_TEXT_HEIGHT 5
+#define LOC_HUD_TEXT_HEIGHT 25
 
 void draw_hud(Context* context)
 {
@@ -33,42 +34,27 @@ void draw_hud(Context* context)
         al_color_name("white")
         , 1);
 
-    al_draw_textf(get_font(), al_color_name("white"), 
-    	location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
-    	location_hud_y + LOC_HUD_MARGIN_TEXT_HEIGHT, 
-    	0, 
-    	"Ship position:");
-    al_draw_textf(get_font(), al_color_name("white"), 
-    	location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
-    	location_hud_y + 2*LOC_HUD_MARGIN_TEXT_HEIGHT + FONT_SIZE, 
-    	0, 
-    	"X: %10.1f", context->current_x);
-    al_draw_textf(get_font(), al_color_name("white"), 
-    	location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
-    	location_hud_y + 3*LOC_HUD_MARGIN_TEXT_HEIGHT + 2*FONT_SIZE, 
-    	0, 
-    	"Y: %10.1f", context->current_y);
-    al_draw_textf(get_font(), al_color_name("white"), 
-        location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
-        location_hud_y + 4*LOC_HUD_MARGIN_TEXT_HEIGHT + 3*FONT_SIZE, 
-        0, 
-        "Alpha: %3.2f", radians_to_degrees(context->angle));
-    al_draw_textf(get_font(), al_color_name("white"), 
-        location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
-        location_hud_y + 5*LOC_HUD_MARGIN_TEXT_HEIGHT + 4*FONT_SIZE, 
-        0, 
-        "Speed: %3.2f", sqrt(pow(context->speed_x,2) + pow(context->speed_y,2)));
+    char* hud_msg = "Ship position: \n"
+        "X: %10.1f\n"
+        "Y: %10.1f\n"
+        "Alpha: %3.2f\n"
+        "Speed: %3.2f\n"
+        "Alg ver: %s\n"
+        "Fuel: %3.2f\n";
 
     get_allegro_version(ver);
-    al_draw_textf(get_font(), al_color_name("white"), 
+    al_draw_multiline_textf(get_font(), al_color_name("white"), 
         location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
-        location_hud_y + 6*LOC_HUD_MARGIN_TEXT_HEIGHT + 5*FONT_SIZE, 
-        0, 
-        "Alg ver: %s", ver);
-
-    al_draw_textf(get_font(), al_color_name("white"), 
-    location_hud_x + LOC_HUD_MARGIN_TEXT_WIDTH, 
-    location_hud_y + 7*LOC_HUD_MARGIN_TEXT_HEIGHT + 6*FONT_SIZE, 
-    0, 
-    "Fuel: %3.2f", context->fuel);
+        location_hud_y + LOC_HUD_MARGIN_TEXT_HEIGHT, 
+        loc_hud_width - LOC_HUD_MARGIN_WIDTH, //max_width
+        //LOC_HUD_TEXT_HEIGHT, //line height
+        al_get_font_line_height(get_font()) + LOC_HUD_MARGIN_TEXT_WIDTH,
+        0, // flags
+        hud_msg,
+    	context->current_x, 
+        context->current_y, 
+        radians_to_degrees(context->angle), 
+        sqrt(pow(context->speed_x,2) + pow(context->speed_y,2)), 
+        ver, 
+        context->fuel);
 }
