@@ -46,7 +46,7 @@ int main(int argc, char **argv){
    //ALLEGRO_SAMPLE* sample = al_load_sample("res/TheForestAwakes.ogg");
    //al_play_sample(sample, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
    load_world();
-   Context context = {177223,102241,0,0,0,0,0,100};
+   Context context = {177223,102241,0,0,0,0,0,300};
 
    while (true)
    {
